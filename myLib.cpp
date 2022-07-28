@@ -35,6 +35,10 @@ int way2()
 			return 1;
 		};
 		if ( lowSign(e1[0])) e1 = "0" + e1;
+		if ( highSign(e1[0])){
+			cout << "[ERROR]: Syntax Error!!\n";
+			return 1;
+		}
 		string convert = infixToPostfix(e1);
         if (convert == "syntax"){
             cout << "[ERROR]: Syntax Error!!\n";
@@ -71,17 +75,17 @@ int main()
 		cout << "|\t4: Thoat chuong trinh                                                      |\n";
 		cout << "------------------------------------------------------------------------------------\n";
 		cout << "Nhap lua chon:\n";
-		int f = 1;
+		string f; 
 		cin >> f;
-		while (f != 1 && f != 2 && f != 3){
+		while (f != "1" && f != "2" && f != "3"){
 			cout << "Yeu cau nhap lai: ";
 			cin >> f;
 		}
-		if (f == 1)
+		if (f == "1")
 		{
 			while (way2());
 		}
-		else if (f == 2)
+		else if (f == "2")
 		{ // kiểm tra dữ liệu nhập vào từ file
 			ifstream fi("input.txt");
 			ofstream fo;
@@ -98,6 +102,10 @@ int main()
                     continue;
                 };
                 if ( lowSign(e1[0])) e1 = "0" + e1;
+				if ( highSign(e1[0])){
+					cout << "[ERROR]: Syntax Error!!\n";
+					continue;;
+				}
                 string convert = infixToPostfix(e1);
 				if (convert == "syntax"){
 					cout << "[ERROR]: Syntax Error!!\n";
@@ -121,7 +129,7 @@ int main()
 			}
 			
 		}
-		else if (f == 3){
+		else if (f == "3"){
 			ofstream fo("fibonacci.txt");
 			int i = 2, lim = 1000;
 			fo << lim << " so Fibonacci dau tien la:\n"; // tính lim số fibonacci

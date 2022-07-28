@@ -13,6 +13,8 @@ bool highSign(char c){
 	return false;
 };
 
+// ++1
+
 string cleanString1(string s){
 	int len = s.length();
 	int i;
@@ -45,7 +47,7 @@ string cleanString1(string s){
 				while (lowSign(s[k])){
 					k++;
 					count++;
-				} 
+				}   //*++--++8889
 				if (!isdigit(s[k])) return "syntax";
 				while (isdigit(s[k])) {
 					k++;
@@ -54,7 +56,8 @@ string cleanString1(string s){
 				s = s.substr(0,j) + "(0" + s.substr(j, count) + ")";
 				len+=3;
 			}
-			else if (highSign(s[i+1])) return "syntax";
+			else if ( !isdigit(s[i+1])) return "syntax";
+			
 		}
 		else if (isdigit(s[i])) continue;
 		else if (s[i] == '('){
