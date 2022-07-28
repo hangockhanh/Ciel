@@ -21,7 +21,7 @@ string cleanString1(string s){
 		if (lowSign(s[i])){
 			int j = i;
 			count = 0;
-			while (lowSign(s[i])){           //j..i tinh so dau -
+			while (lowSign(s[i])){     	      //j..i tinh so dau -
 				if ( highSign(s[i+1])){
 					return "syntax";
 				}
@@ -57,7 +57,14 @@ string cleanString1(string s){
 			else if (highSign(s[i+1])) return "syntax";
 		}
 		else if (isdigit(s[i])) continue;
-		else if (s[i] == '(' || s[i] == ')') continue;
+		else if (s[i] == '('){
+			if (highSign(s[i+1])) return "syntax";
+			else if (lowSign(s[i+1])){
+				s = s.substr(0, i+1) + "0" + s.substr(i+1, len-i+1);
+				len++;
+			}
+		}
+		else if (s[i] == ')') continue;
 		else return "syntax";
 	}
 	return s;

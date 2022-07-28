@@ -390,6 +390,7 @@ string infixToPostfix(string s)
 			}
 		}
 	}
+	if ( !st.empty()) return "syntax";
 	return ans;
 }
 bigInt calcPostfix(string a)

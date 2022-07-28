@@ -36,6 +36,11 @@ int way2()
 		};
 		if ( lowSign(e1[0])) e1 = "0" + e1;
 		string convert = infixToPostfix(e1);
+        if (convert == "syntax"){
+            cout << "[ERROR]: Syntax Error!!\n";
+            return 1;
+        }
+        // cout << "posifix " << convert << endl; 
 		bigInt ans = calcPostfix(convert);
 		if (ans.getSign() == ' '){               
 			cout << "[ERROR]: Cannot divide by 0\n";
@@ -82,13 +87,37 @@ int main()
 			ofstream fo;
 			fo.open("output.txt", std::ofstream::app);
 
-			fi.ignore(); // tính biểu thức trung tố
+			// fi.ignore(); // tính biểu thức trung tố
 			string e;
 			while (getline(fi, e)){
-				e = noSpace(e);
-				string convert = infixToPostfix(e);
-				bigInt ans = calcPostfix(convert);
-				fo << e << " = " << ans << endl;
+				if (e == "") return 0;
+                e = noSpace(e);
+                string e1 = cleanString1(e);
+                if (e1 == "syntax"){
+                    cout << "[ERROR]: Syntax Error!!\n";
+                    continue;
+                };
+                if ( lowSign(e1[0])) e1 = "0" + e1;
+                string convert = infixToPostfix(e1);
+				if (convert == "syntax"){
+					cout << "[ERROR]: Syntax Error!!\n";
+					continue;
+        		}
+                bigInt ans = calcPostfix(convert);
+                if (ans.getSign() == ' '){               
+                    cout << "[ERROR]: Cannot divide by 0\n";
+                    continue;
+                }
+                string res;
+                for (int i = 0; i < e.length(); i++)
+                {
+                    res.push_back(e[i]);
+                }
+                res.push_back(' ');
+                ofstream fo;
+                fo.open("output.txt", std::ofstream::app);
+                fo << res << "= " << ans << endl;
+                cout << res << "= " << ans << endl;
 			}
 			
 		}
