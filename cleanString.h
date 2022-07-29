@@ -26,7 +26,7 @@ string cleanString(string s){
 			}
 			int j = i;
 			count = 0;
-			while (lowSign(s[i])){     	      //j..i tinh so dau -
+			while (lowSign(s[i])){     	    
 				if ( highSign(s[i+1])){ 
 					return "syntax";
 				}
@@ -54,14 +54,32 @@ string cleanString(string s){
 					k++;
 					count++;
 				}   
-				if (!isdigit(s[k])) return "syntax";
+				if (s[k] == '('){
+					int openParen = 1;
+					
+					while (1){
+						k++;
+						if (s[k] == '(') openParen++;
+						else if (s[k] == ')') openParen--;
+						if (openParen== 0){
+							s = s.substr(0, j) + "(0" + s.substr(j, k-i) +")" + s.substr(k+1, len-k-1);
+							len = len + 3;
+							k = k + 3;
+							break;
+						}
+					}
+				}
+				if (!isdigit(s[k]) && s[k] != ')'){return "syntax";}
 				while (isdigit(s[k])) {
 					k++;
 					count++;
 				}
-				s = s.substr(0,j) + "(0" + s.substr(j, count) + ")" + s.substr(k, len - k); 
-				len+=3;
-			}			
+				if (s[k] != ')'){
+					s = s.substr(0,j) + "(0" + s.substr(j, count) + ")" + s.substr(k, len - k);  
+					len+=3;
+				}
+			}		
+			if (highSign(s[i+1])) return "syntax";	
 		}
 		else if (isdigit(s[i])) continue;
 		else if (s[i] == '('){
@@ -72,10 +90,7 @@ string cleanString(string s){
 			}
 		}
 		else if (s[i] == ')') continue;
-		else{ 
-			cout << s << endl;
-			return "syntax";
-		} 
+		else return "syntax";
 	}
 	return s;
 }

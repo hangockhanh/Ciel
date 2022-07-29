@@ -33,16 +33,19 @@ int way2()
 			cout << "[ERROR]: Syntax Error!!\n";
 			return 1;
 		};
+		
 		string convert = infixToPostfix(e1);
         if (convert == "syntax"){ 
             cout << "[ERROR]: Syntax Error!!\n";
             return 1;
         }
+		
 		bigInt ans = calcPostfix(convert);
 		if (ans.getSign() == ' '){               
 			cout << "[ERROR]: Cannot divide by 0\n";
 			return 1;
 		}
+
 		string res;
 		for (int i = 0; i < e.length(); i++)
 		{
@@ -97,6 +100,7 @@ int main()
 					cout << "[ERROR]: Syntax Error!!\n";
 					continue;
         		}
+
                 bigInt ans = calcPostfix(convert);
                 if (ans.getSign() == ' '){         
                     cout << "[ERROR]: Cannot divide by 0\n";
