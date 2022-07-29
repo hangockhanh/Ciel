@@ -415,8 +415,8 @@ bigInt calcPostfix(string a)
 				bigInt top1 = st.top();
 				st.pop();
 				bigInt top2 = st.top();
-				st.pop(); cout << top2 << " " << top1 << " " << a[i] << endl;
-				bigInt res = calc(top2, top1, a[i]); cout << res << endl;
+				st.pop(); 
+				bigInt res = calc(top2, top1, a[i]);
 				if (res.getSign() == ' ') return res;
 				st.push(res);
 			}

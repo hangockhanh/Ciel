@@ -28,7 +28,6 @@ int way2()
 		getline(cin, e); 
 		if (e == "") return 0;
 		e = noSpace(e);
-		// cout << "nospace " << e << endl;
 		string e1 = cleanString(e);
 		if (e1 == "syntax"){
 			cout << "[ERROR]: Syntax Error!!\n";
@@ -87,20 +86,19 @@ int main()
 			while (getline(fi, e)){
 				if (e == "") return 0;
                 e = noSpace(e); 
-                string e1 = cleanString(e);
+                string e1 = cleanString(e); 
                 if (e1 == "syntax"){
                     cout << "[ERROR]: Syntax Error!!\n";
                     continue;
                 };
 
                 string convert = infixToPostfix(e1);
-				if (convert == "syntax"){
+				if (convert == "syntax"){ 
 					cout << "[ERROR]: Syntax Error!!\n";
 					continue;
         		}
-				cout << "convert " << convert << endl;
                 bigInt ans = calcPostfix(convert);
-                if (ans.getSign() == ' '){               
+                if (ans.getSign() == ' '){         
                     cout << "[ERROR]: Cannot divide by 0\n";
                     continue;
                 }

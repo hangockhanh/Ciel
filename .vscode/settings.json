@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.sol": "solidity",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ostream": "cpp"
     }
 }

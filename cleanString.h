@@ -13,8 +13,6 @@ bool highSign(char c){
 	return false;
 };
 
-// ++1
-
 string cleanString(string s){
 	int len = s.length();
 	int i;
@@ -43,7 +41,6 @@ string cleanString(string s){
 			} 
 			len -= (i-j-1);
 			i = j + 1;
-			
 		}
 		if (highSign(s[i])){
 			if (i == 0){
@@ -56,16 +53,15 @@ string cleanString(string s){
 				while (lowSign(s[k])){
 					k++;
 					count++;
-				}   //*++--++8889
+				}   
 				if (!isdigit(s[k])) return "syntax";
 				while (isdigit(s[k])) {
 					k++;
 					count++;
 				}
-				s = s.substr(0,j) + "(0" + s.substr(j, count) + ")";
+				s = s.substr(0,j) + "(0" + s.substr(j, count) + ")" + s.substr(k, len - k); 
 				len+=3;
-			}
-			
+			}			
 		}
 		else if (isdigit(s[i])) continue;
 		else if (s[i] == '('){
@@ -76,7 +72,10 @@ string cleanString(string s){
 			}
 		}
 		else if (s[i] == ')') continue;
-		else return "syntax";
+		else{ 
+			cout << s << endl;
+			return "syntax";
+		} 
 	}
 	return s;
 }
