@@ -162,7 +162,7 @@ bigInt operator+(bigInt s1, bigInt s2)
 	else if (s1.sign == '+' && s2.sign == '-')
 	{
 		res = bigInt::sub(a, b);
-		if (a > b)
+		if (a < b)
 			sign = '-';
 	}
 	else
@@ -415,8 +415,8 @@ bigInt calcPostfix(string a)
 				bigInt top1 = st.top();
 				st.pop();
 				bigInt top2 = st.top();
-				st.pop();
-				bigInt res = calc(top2, top1, a[i]);
+				st.pop(); cout << top2 << " " << top1 << " " << a[i] << endl;
+				bigInt res = calc(top2, top1, a[i]); cout << res << endl;
 				if (res.getSign() == ' ') return res;
 				st.push(res);
 			}

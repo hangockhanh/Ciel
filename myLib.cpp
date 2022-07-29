@@ -98,6 +98,7 @@ int main()
 					cout << "[ERROR]: Syntax Error!!\n";
 					continue;
         		}
+				cout << "convert " << convert << endl;
                 bigInt ans = calcPostfix(convert);
                 if (ans.getSign() == ' '){               
                     cout << "[ERROR]: Cannot divide by 0\n";
