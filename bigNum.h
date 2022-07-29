@@ -264,8 +264,6 @@ bigInt operator/(bigInt s1, bigInt s2)
 	if (s2.num == "0"){
 		return bigInt(' ', "[ERROR]: Cannot divide by 0");
 	}
-	
-		
 	string a = s1.num, b = s2.num;
 	char signS2 = s2.sign;
 	if (s2.sign == '-')
@@ -296,6 +294,7 @@ bigInt operator/(bigInt s1, bigInt s2)
 	if (res.length() == 0)
 		res = "0";
 	char si = (s1.sign == '+' && signS2 == '+' || s1.sign == '-' && signS2 == '-') ? '+' : '-';
+	if (s1.sign == '-' && s2.sign == '+') res = to_string(stoi(res) + 1);
 	bigInt ans(si, res);
 	ans.convertToStandardZero();
 	return ans;
@@ -309,12 +308,9 @@ bigInt operator%(bigInt s1, bigInt s2)
 { // nạp chồng toán tử %
 	if (s2.num == "0")
 		return bigInt(' ', "[ERROR]: Cannot divide by 0");
-	bigInt div = s1 / s2;
-	bigInt res = s1 - (s2 * div);
-	if (s1.sign == '-' && s2.sign == '-' || s1.sign == '+' && s2.sign == '+')
-		res.sign = '+';
-	else
-		res.sign = '-';
+	bigInt div = s1 / s2;  
+	bigInt res = s1 - (s2 * div);  
+	res.sign = '+';
 	res.convertToStandardZero();
 	return res;
 }
@@ -336,7 +332,7 @@ string noSpace(string s)
 }
 int pri(char x)
 { // mức độ ưu tiên của toán tử
-	if (x == '*' || x == '/')
+	if (x == '*' || x == '/' || x == '%')
 		return 2;
 	if (x == '+' || x == '-')
 		return 1;
@@ -350,6 +346,8 @@ bigInt calc(bigInt a, bigInt b, char x)
 		return a / b;
 	if (x == '+')
 		return a + b;
+	if (x == '%') 
+		return a % b;
 	return a - b;
 }
 string infixToPostfix(string s)
@@ -381,7 +379,7 @@ string infixToPostfix(string s)
 			}
 			else
 			{
-				while (!st.empty() && pri(st.top()) >= pri(s[i]))
+				while (!st.empty() && pri(st.top()) >= pri(s[i]) )
 				{
 					ans.push_back(st.top());
 					st.pop();

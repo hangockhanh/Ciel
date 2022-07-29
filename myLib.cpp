@@ -20,7 +20,7 @@ bool test(bigInt a, bigInt b)
 }
 
 int way2()
-{ // tính biểu thức trung tố
+{ 
 	while (1){
 		cout << "Nhap bieu thuc: ";
 		string e;
@@ -29,22 +29,16 @@ int way2()
 		if (e == "") return 0;
 		e = noSpace(e);
 		// cout << "nospace " << e << endl;
-		string e1 = cleanString1(e);
+		string e1 = cleanString(e);
 		if (e1 == "syntax"){
 			cout << "[ERROR]: Syntax Error!!\n";
 			return 1;
 		};
-		if ( lowSign(e1[0])) e1 = "0" + e1;
-		if ( highSign(e1[0])){
-			cout << "[ERROR]: Syntax Error!!\n";
-			return 1;
-		}
 		string convert = infixToPostfix(e1);
-        if (convert == "syntax"){
+        if (convert == "syntax"){ 
             cout << "[ERROR]: Syntax Error!!\n";
             return 1;
         }
-        // cout << "posifix " << convert << endl; 
 		bigInt ans = calcPostfix(convert);
 		if (ans.getSign() == ' '){               
 			cout << "[ERROR]: Cannot divide by 0\n";
@@ -55,17 +49,14 @@ int way2()
 		{
 			res.push_back(e[i]);
 		}
-		res.push_back(' ');
 		ofstream fo;
 		fo.open("output.txt", std::ofstream::app);
-		fo << res << "= " << ans << endl;
-		cout << res << "= " << ans << endl;
+		fo << res << " = " << ans << endl;
+		cout << res << " = " << ans << endl;
 	}
 }
 int main()
 { // hàm main
-	// cout << bigInt::add("1","2"); return 0;
-	bigInt x('-', "1234");
 	while (1){
 		cout << "\n---------------------CHUONG TRINH TINH SO NGUYEN LON--------------------------------\n";
 		cout << "|\tMENU:                                                                      |\n";
@@ -77,7 +68,7 @@ int main()
 		cout << "Nhap lua chon:\n";
 		string f; 
 		cin >> f;
-		while (f != "1" && f != "2" && f != "3"){
+		while (f != "1" && f != "2" && f != "3" && f != "4"){
 			cout << "Yeu cau nhap lai: ";
 			cin >> f;
 		}
@@ -95,17 +86,13 @@ int main()
 			string e;
 			while (getline(fi, e)){
 				if (e == "") return 0;
-                e = noSpace(e);
-                string e1 = cleanString1(e);
+                e = noSpace(e); 
+                string e1 = cleanString(e);
                 if (e1 == "syntax"){
                     cout << "[ERROR]: Syntax Error!!\n";
                     continue;
                 };
-                if ( lowSign(e1[0])) e1 = "0" + e1;
-				if ( highSign(e1[0])){
-					cout << "[ERROR]: Syntax Error!!\n";
-					continue;;
-				}
+
                 string convert = infixToPostfix(e1);
 				if (convert == "syntax"){
 					cout << "[ERROR]: Syntax Error!!\n";
